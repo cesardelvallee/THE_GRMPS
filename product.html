@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRMP — Classic · THE GRAMPS</title>
+  <link rel="icon" type="image/png" href="IMG/GRMPS_FAVICON.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./product.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+</head>
+<body class="product-page">
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav id="nav" class="nav-visible">
+    <a href="index.html" class="nav-logo-link">
+      <img src="" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
+    </a>
+    <ul class="nav-links nav-links-visible">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#collection">Collection</a></li>
+      <li><a href="index.html#contact">Waitlist</a></li>
+      <li><a href="https://cargo.site" target="_blank" rel="noopener">Story</a></li>
+    </ul>
+  </nav>
+
+  <!-- BACK -->
+  <a href="index.html" class="pd-back" id="pd-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Collection
+  </a>
+
+  <!-- HERO SPLIT -->
+  <section class="pd-hero">
+
+    <div class="pd-viewer" id="pd-viewer">
+      <!-- Main image -->
+      <div class="pd-gallery">
+        <div class="pd-main-img-wrap">
+          <img id="pd-main-img" src="IMG/grmp_front.png" alt="GRMP Classic" />
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="pd-thumbs" id="pd-thumbs">
+          <button class="pd-thumb active" data-src="IMG/grmp_front.png">
+            <img src="IMG/grmp_front.png" alt="Front" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_34_front.png">
+            <img src="IMG/grmp_34_front.png" alt="¾ Front" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_left.png">
+            <img src="IMG/grmp_left.png" alt="Left" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_back.png">
+            <img src="IMG/grmp_back.png" alt="Back" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_right.png">
+            <img src="IMG/grmp_right.png" alt="Right" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_34_back.png">
+            <img src="IMG/grmp_34_back.png" alt="¾ Back" />
+          </button>
+          <button class="pd-thumb" data-src="IMG/grmp_low.png">
+            <img src="IMG/grmp_low.png" alt="Low" />
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pd-info" id="pd-info">
+      <div class="pd-info-inner">
+
+        <p class="pd-eyebrow">Drop 001 · Urban Series</p>
+
+        <h1 class="pd-name">
+          GRMP<br><em>Classic</em>
+        </h1>
+
+        <div class="pd-price-row">
+          <span class="pd-price">$99</span>
+          <span class="pd-badge">001 / 100</span>
+        </div>
+
+        <p class="pd-desc">A statement piece born at the intersection of urban art and collectible culture. Each GRMP Classic is individually numbered and finished by hand — no two pieces are completely identical.</p>
+
+        <div class="pd-specs-mini">
+          <div class="pd-spec-item">
+            <span class="spec-k">Height</span>
+            <span class="spec-v">28 cm</span>
+          </div>
+          <div class="pd-spec-item">
+            <span class="spec-k">Material</span>
+            <span class="spec-v">Vinyl</span>
+          </div>
+          <div class="pd-spec-item">
+            <span class="spec-k">Finish</span>
+            <span class="spec-v">Hand-painted</span>
+          </div>
+          <div class="pd-spec-item">
+            <span class="spec-k">Weight</span>
+            <span class="spec-v">420 g</span>
+          </div>
+        </div>
+
+        <div class="pd-actions">
+          <button class="pd-cta" id="pd-cta">Add to Waitlist</button>
+        </div>
+
+        <p class="pd-note">
+          Ships worldwide in a numbered collector's box.<br>
+          Certificate of authenticity included.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="pd-story">
+    <div class="pd-story-grid">
+      <div class="pd-story-img">
+        <img src="IMG/CARD_MODEL.png" alt="GRMP Classic" />
+      </div>
+      <div class="pd-story-text">
+        <span class="section-tag">The Piece</span>
+        <h2 class="pd-story-h">Crafted with<br>intention.</h2>
+        <p>Every detail of the GRMP Classic has been obsessed over — from the weight of the vinyl to the precision of the hand-applied paint. It is not just a figure. It is a cultural artifact.</p>
+        <p>Inspired by the raw visual language of street art and the reverence of gallery sculpture, the Classic colorway is the definitive expression of the GRAMPS universe.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL SPECS -->
+  <section class="pd-specs-section">
+    <div class="pd-specs-wrap">
+      <span class="section-tag">Specifications</span>
+      <h2 class="pd-specs-h">Details.</h2>
+      <div class="specs-list">
+        <div class="specs-row"><span class="sk">Name</span><span class="sv">GRMP — Classic</span></div>
+        <div class="specs-row"><span class="sk">Drop</span><span class="sv">001 — Urban Series</span></div>
+        <div class="specs-row"><span class="sk">Edition</span><span class="sv">001 / 100 · Limited</span></div>
+        <div class="specs-row"><span class="sk">Height</span><span class="sv">28 cm / 11 in</span></div>
+        <div class="specs-row"><span class="sk">Material</span><span class="sv">Soft Vinyl</span></div>
+        <div class="specs-row"><span class="sk">Finish</span><span class="sv">Hand-painted, matte</span></div>
+        <div class="specs-row"><span class="sk">Packaging</span><span class="sv">Numbered collector's box</span></div>
+        <div class="specs-row"><span class="sk">Includes</span><span class="sv">Certificate of authenticity</span></div>
+        <div class="specs-row"><span class="sk">Price</span><span class="sv">$99 USD</span></div>
+        <div class="specs-row"><span class="sk">Shipping</span><span class="sv">Worldwide</span></div>
+        <div class="specs-row"><span class="sk">Release</span><span class="sv">2025</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="pd-marquee" aria-hidden="true">
+    <div class="pd-marquee-track">
+      <span>THE GRAMPS</span><span>·</span>
+      <span>URBAN ART TOYS</span><span>·</span>
+      <span>DROP 001</span><span>·</span>
+      <span>LIMITED EDITION</span><span>·</span>
+      <span>HAND PAINTED</span><span>·</span>
+      <span>THE GRAMPS</span><span>·</span>
+      <span>URBAN ART TOYS</span><span>·</span>
+      <span>DROP 001</span><span>·</span>
+      <span>LIMITED EDITION</span><span>·</span>
+      <span>HAND PAINTED</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="" alt="THE GRAMPS" class="ft-logo" id="ft-logo" />
+    <p class="ft-tag">Handcrafted. Limited. Yours.</p>
+    <div class="ft-right">
+      <ul class="ft-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#collection">Collection</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <p class="ft-copy">© THE GRAMPS 2025</p>
+    </div>
+  </footer>
+
+  <script type="module" src="./product.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="THE GRAMPS — Limited Edition Art Toys. Where street culture meets sculpture." />
+  <title>THE GRAMPS — Limited Edition Art Toys</title>
+  <link rel="icon" type="image/png" href="IMG/GRMPS_FAVICON.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- GSAP (must be global before the module script) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Three.js import map — MUST appear before any type="module" scripts -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.155.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.155.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- model-viewer (mobile fallback) -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <img src="" alt="THE GRAMPS" id="pre-logo" />
+    <div id="pre-counter">000</div>
+    <div class="pre-bar"><div id="pre-bar-fill"></div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <img src="" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#contact">Waitlist</a></li>
+      <li><a href="https://cargo.site" target="_blank" rel="noopener">Story</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Partículas de fondo -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Modelo 3D — derecha -->
+    <model-viewer id="hero-mv"
+      auto-rotate
+      rotation-per-second="18deg"
+      camera-controls
+      disable-zoom
+      shadow-intensity="0"
+      exposure="0.5"
+      camera-orbit="0deg 80deg 105%"
+      style="background:transparent;--poster-color:transparent">
+    </model-viewer>
+
+    <!-- Texto — izquierda -->
+    <div class="hero-content">
+      <p class="hero-eyebrow" id="hero-eyebrow">Urban Art Toys</p>
+      <h1 class="hero-title">
+        <span class="line" id="hl1">THE</span>
+        <span class="line" id="hl2">GRMPS</span>
+      </h1>
+      <p class="hero-sub" id="hero-sub">Limited Edition Art Toys</p>
+    </div>
+
+    <div class="scroll-hint" id="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="about-tag">The Brand</span>
+        <h2 class="about-headline">Where street culture<br>meets sculpture.</h2>
+        <div class="about-body">
+          <p>THE GRAMPS is born at the intersection of urban art, collectible culture, and fine craftsmanship. Each figure is a statement — a limited piece that bridges the gap between the street and the gallery.</p>
+          <p>Inspired by the raw energy of city walls and the quiet permanence of sculpture, every drop is a conversation between tradition and rebellion.</p>
+        </div>
+      </div>
+      <div class="about-3d">
+        <canvas id="about-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section id="collection">
+    <span class="section-tag">Drop 001</span>
+    <h2 class="section-title">Urban Series</h2>
+    <div class="col-grid" id="col-grid">
+
+      <article class="card" data-idx="0" onclick="location.href='product.html'" style="cursor:none">
+        <div class="card-scene">
+          <img src="IMG/CARD_MODEL.png" class="card-img" alt="GRMP Classic" />
+        </div>
+        <div class="card-info">
+          <p class="card-ed">Edition 001 / 100</p>
+          <h3 class="card-name">GRMP — Classic</h3>
+          <p class="card-price">$99</p>
+          <button class="card-btn" onclick="event.stopPropagation();location.href='product.html'">VIEW DETAILS</button>
+        </div>
+      </article>
+
+      <article class="card" data-idx="1">
+        <div class="card-scene card-soon">
+          <span class="soon-label">Coming Soon</span>
+        </div>
+        <div class="card-info">
+          <p class="card-ed">Edition 001 / 100</p>
+          <h3 class="card-name">GRMP — Midnight</h3>
+          <p class="card-price">$99</p>
+          <button class="card-btn" data-wl>NOTIFY ME</button>
+        </div>
+      </article>
+
+      <article class="card" data-idx="2">
+        <div class="card-scene card-soon">
+          <span class="soon-label">Coming Soon</span>
+        </div>
+        <div class="card-info">
+          <p class="card-ed">Edition 001 / 100</p>
+          <h3 class="card-name">GRMP — Dusk</h3>
+          <p class="card-price">$99</p>
+          <button class="card-btn" data-wl>NOTIFY ME</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num" id="s0">001</div>
+        <div class="stat-lbl">Pieces in this drop</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="s1">2026</div>
+        <div class="stat-lbl">Year</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="s2">∞</div>
+        <div class="stat-lbl">Collectible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / WAITLIST -->
+  <section id="contact">
+    <canvas id="contact-canvas"></canvas>
+    <div class="contact-inner">
+      <h2 class="contact-title">Join the<br>Waitlist.</h2>
+      <p class="contact-sub">Be first to know when DROP 001 goes live.<br>Limited pieces. No restocks.</p>
+      <form class="wl-form" id="wl-form" novalidate>
+        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Notify Me</button>
+      </form>
+      <p id="form-ok">You're on the list. Stay tuned. ✦</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="" alt="THE GRAMPS" class="ft-logo" />
+    <p class="ft-tag">Handcrafted. Limited. Yours.</p>
+    <div class="ft-right">
+      <ul class="ft-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p class="ft-copy">© THE GRAMPS 2025</p>
+    </div>
+  </footer>
+
+  
+  <script type="module" src="./script.js"></script>
+
+</body>
+</html>
