@@ -3,16 +3,12 @@ import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { LOGO_URL, GLB_URL } from './assets.js';
 
-/* ── Inyectar logos y modelo en cuanto el módulo carga ── */
 document.querySelectorAll('img[alt="THE GRAMPS"]').forEach(img => { img.src = LOGO_URL; });
 
 gsap.registerPlugin(ScrollTrigger);
 
 const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/*
-   CURSOR
-*/
 const curEl  = document.getElementById('cursor');
 const curRng = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -33,9 +29,6 @@ document.querySelectorAll('a,button,.card').forEach(el => {
   el.addEventListener('mouseleave', () => { curEl.classList.remove('on'); curRng.classList.remove('on'); });
 });
 
-/*
-   PRELOADER
-*/
 function runPreloader() {
   const tl = gsap.timeline({ onComplete: finishPreloader });
   tl.to('#pre-logo', { opacity: 1, duration: .6, ease: 'power2.out' }, .25);
@@ -63,9 +56,6 @@ function finishPreloader() {
 }
 runPreloader();
 
-/*
-   THREE.JS SHARED UTILS
-*/
 function makeLights(scene, cfg = {}) {
   const { aI=.6, dC=0xe8e0d0, dI=1.2, rC=0x0a3144, rI=.8 } = cfg;
   scene.add(new THREE.AmbientLight(0xffffff, aI));
@@ -92,7 +82,6 @@ function makeRenderer(canvas, opts = {}) {
   return r;
 }
 
-
 function scaleToFit(model, targetSize) {
   const box = new THREE.Box3().setFromObject(model);
   const c   = box.getCenter(new THREE.Vector3());
@@ -103,9 +92,6 @@ function scaleToFit(model, targetSize) {
   return sc;
 }
 
-/*
-   PARTICULAS
-*/
 function makeParticles(scene, n = 360, spread = 9) {
   const pos = new Float32Array(n * 3);
   const vel = new Float32Array(n * 3);
@@ -136,9 +122,6 @@ function tickParticles({ pts, vel }) {
   p.needsUpdate = true;
 }
 
-/*
-   HERO SCENE — partículas de fondo + model-viewer para el modelo
-*/
 const hCanvas = document.getElementById('hero-canvas');
 const hRend   = makeRenderer(hCanvas);
 hRend.setSize(innerWidth, innerHeight);
@@ -149,7 +132,6 @@ hCam.position.set(0, 0, 6);
 
 const particles = makeParticles(hScene);
 
-/* Asignar el modelo al model-viewer del hero */
 document.getElementById('hero-mv').setAttribute('src', GLB_URL);
 
 let gltfSrc = null;
@@ -177,9 +159,6 @@ window.addEventListener('resize', () => {
   hRend.setSize(innerWidth, innerHeight);
 }, { passive: true });
 
-/*
-   HERO REVEAL
-*/
 function splitChars(el) {
   const t = el.textContent;
   el.innerHTML = t.split('').map(c =>
@@ -193,7 +172,6 @@ function revealHero() {
   const ch2 = splitChars(document.getElementById('hl2'));
   const tl  = gsap.timeline({ delay: .15 });
 
-  /* Centrado vertical via GSAP para que 'x' no rompa el translateY */
   gsap.set('.hero-content', { yPercent: -50 });
 
   tl.to(['#nav-logo','#nav-links'], { opacity: 1, duration: .6, ease: 'power2.out', stagger: .1 }, 0);
@@ -208,21 +186,19 @@ function revealHero() {
   tl.to('#hero-sub',    { opacity: 1, duration: .5, ease: 'power2.out' }, .85);
   tl.to('#scroll-hint', { opacity: 1, duration: .5, ease: 'power2.out' }, 1.1);
 
-  /* ── Scroll animado tipo Apple ── */
   const mv = document.getElementById('hero-mv');
   let autoRotating = true;
 
   ScrollTrigger.create({
     trigger: '#hero',
     start: 'top top',
-    end: '+=220%',       // 2.2× viewport → animación lenta y larga
+    end: '+=220%',
     pin: true,
     scrub: 2.5,
     onUpdate(self) {
       const p = self.progress;
-      const e = p * p * (3 - 2 * p); // smoothstep
+      const e = p * p * (3 - 2 * p);
 
-      /* Parar auto-rotate cuando empieza el scroll */
       if (p > 0.02 && autoRotating) {
         mv.removeAttribute('auto-rotate');
         autoRotating = false;
@@ -231,7 +207,6 @@ function revealHero() {
         autoRotating = true;
       }
 
-      /* Modelo: se desplaza a la izquierda y se desvanece */
       gsap.set('#hero-mv', {
         x: e * (-window.innerWidth * 0.48),
         opacity: Math.max(0, 1 - e * 1.5)
@@ -242,9 +217,6 @@ function revealHero() {
   });
 }
 
-/*
-   ABOUT SCENE
-*/
 function initAbout() {
   const canvas = document.getElementById('about-canvas');
   if (!canvas || !gltfSrc) return;
@@ -265,9 +237,6 @@ function initAbout() {
   (function loop() { requestAnimationFrame(loop); ctrl.update(); r.render(scene, cam); })();
 }
 
-/*
-   CARD SCENES 
-*/
 const CAM_POS = [
   new THREE.Vector3(0,   .4,  6),
   new THREE.Vector3(3.5, .4,  4.8),
@@ -310,9 +279,6 @@ function initCards() {
   }
 }
 
-/*
-   CONTACT BG SCENE
-*/
 function initContact() {
   const canvas = document.getElementById('contact-canvas');
   if (!canvas || !gltfSrc) return;
@@ -335,10 +301,6 @@ function initContact() {
     r.render(scene, cam);
   })();
 }
-
-/*
-   SCROLL ANIMATIONS
-*/
 
 gsap.from('.about-tag',      { opacity:0, y:18, duration:.7, scrollTrigger:{ trigger:'#about', start:'top 72%', once:true } });
 gsap.from('.about-headline', { opacity:0, y:36, duration:1,  scrollTrigger:{ trigger:'#about', start:'top 65%', once:true }, ease:'power3.out' });
@@ -381,9 +343,6 @@ gsap.from('.contact-title', { opacity:0, y:36, duration:1,  scrollTrigger:{ trig
 gsap.from('.contact-sub',   { opacity:0, y:22, duration:.8, delay:.15, scrollTrigger:{ trigger:'#contact', start:'top 68%', once:true } });
 gsap.from('.wl-form',       { opacity:0, y:20, duration:.7, delay:.3,  scrollTrigger:{ trigger:'#contact', start:'top 65%', once:true } });
 
-/*
-   WAITLIST FORM
-*/
 document.getElementById('wl-form').addEventListener('submit', e => {
   e.preventDefault();
   const input = e.target.querySelector('input[type="email"]');

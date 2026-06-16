@@ -1,11 +1,8 @@
-/* ── PRODUCT PAGE OVERRIDES ── */
-
 .product-page body,
 body.product-page {
   overflow-x: hidden;
 }
 
-/* Nav always visible on product page */
 .nav-visible {
   opacity: 1 !important;
 }
@@ -16,7 +13,6 @@ body.product-page {
   display: contents;
 }
 
-/* Back link */
 .pd-back {
   position: fixed;
   top: 84px;
@@ -37,14 +33,12 @@ body.product-page {
 }
 .pd-back:hover { color: var(--highlight); }
 
-/* ── HERO SPLIT ── */
 .pd-hero {
   display: grid;
   grid-template-columns: 45% 55%;
   min-height: 100vh;
 }
 
-/* LEFT: sticky 3D viewer */
 .pd-viewer {
   position: sticky;
   top: 0;
@@ -52,7 +46,6 @@ body.product-page {
   background: radial-gradient(ellipse at 50% 60%, rgba(10,49,68,.25) 0%, transparent 68%);
 }
 
-/* Gallery layout: thumbnails left, main image right */
 .pd-gallery {
   display: flex;
   height: 100%;
@@ -99,7 +92,6 @@ body.product-page {
   border-color: var(--highlight);
 }
 
-/* Main image */
 .pd-main-img-wrap {
   flex: 1;
   display: flex;
@@ -118,7 +110,6 @@ body.product-page {
   transition: opacity .25s ease;
 }
 
-/* RIGHT: scrollable info */
 .pd-info {
   padding: 7vh 4vw 5vh 4vw;
   border-left: 1px solid rgba(232,224,208,.07);
@@ -194,7 +185,6 @@ body.product-page {
   opacity: 0;
 }
 
-/* Mini specs grid */
 .pd-specs-mini {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -227,7 +217,6 @@ body.product-page {
   color: var(--text);
 }
 
-/* CTA */
 .pd-actions {
   margin-bottom: 14px;
   opacity: 0;
@@ -262,7 +251,6 @@ body.product-page {
   opacity: 0;
 }
 
-/* ── STORY ── */
 .pd-story {
   padding: 120px 8vw;
   border-top: 1px solid rgba(232,224,208,.07);
@@ -308,7 +296,6 @@ body.product-page {
   margin-bottom: 14px;
 }
 
-/* ── SPECS TABLE ── */
 .pd-specs-section {
   padding: 100px 8vw;
   border-top: 1px solid rgba(232,224,208,.07);
@@ -360,7 +347,6 @@ body.product-page {
   color: var(--text);
 }
 
-/* ── MARQUEE ── */
 .pd-marquee {
   overflow: hidden;
   border-top: 1px solid rgba(232,224,208,.06);
@@ -385,7 +371,6 @@ body.product-page {
   to   { transform: translateX(-50%); }
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .pd-hero { grid-template-columns: 1fr; }
 
