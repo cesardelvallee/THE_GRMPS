@@ -363,3 +363,32 @@ document.querySelectorAll('[data-wl]').forEach(btn => {
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+const burger     = document.getElementById('nav-burger');
+const navMobile  = document.getElementById('nav-mobile');
+
+function openMenu() {
+  burger.classList.add('open');
+  burger.setAttribute('aria-expanded', 'true');
+  navMobile.classList.add('open');
+  navMobile.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  navMobile.classList.remove('open');
+  navMobile.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', () => {
+  navMobile.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+document.getElementById('nav-mobile-close').addEventListener('click', closeMenu);
+
+navMobile.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', closeMenu);
+});
