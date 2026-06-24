@@ -4,14 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="THE GRAMPS — Limited Edition Art Toys. Where street culture meets sculpture." />
+  <meta name="theme-color" content="#080f1c" />
   <title>THE GRAMPS — Limited Edition Art Toys</title>
   <link rel="icon" type="image/png" href="IMG/GRMPS_FAVICON.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="THE GRAMPS — Limited Edition Art Toys" />
+  <meta property="og:description" content="Where street culture meets sculpture. Limited, numbered, hand-painted art toys." />
+  <meta property="og:image" content="IMG/CARD_MODEL.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="THE GRAMPS — Limited Edition Art Toys" />
+  <meta name="twitter:description" content="Where street culture meets sculpture. Limited, numbered, hand-painted art toys." />
+  <meta name="twitter:image" content="IMG/CARD_MODEL.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./enhance.css?v=7" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -28,6 +39,9 @@
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
+
+  <div id="grain" aria-hidden="true"></div>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
@@ -112,12 +126,36 @@
     </div>
   </section>
 
+  <section id="process">
+    <div class="process-head">
+      <span class="eh-tag reveal">How it's made</span>
+      <h2 class="eh-title reveal d1">From sketch<br>to statement.</h2>
+    </div>
+    <div class="process-steps">
+      <article class="pstep reveal">
+        <span class="pstep-num">01</span>
+        <h3>Designed</h3>
+        <p>Every GRMP starts as a hand-drawn concept — refined over dozens of iterations until the silhouette feels unmistakably ours.</p>
+      </article>
+      <article class="pstep reveal d1">
+        <span class="pstep-num">02</span>
+        <h3>Sculpted</h3>
+        <p>The form is sculpted and cast in premium soft vinyl, engineered to hold crisp detail from every angle and survive a lifetime on the shelf.</p>
+      </article>
+      <article class="pstep reveal d2">
+        <span class="pstep-num">03</span>
+        <h3>Hand-finished</h3>
+        <p>Each piece is hand-painted, individually numbered, and sealed with a matte finish — then boxed with its certificate of authenticity.</p>
+      </article>
+    </div>
+  </section>
+
   <section id="collection">
     <span class="section-tag">Drop 001</span>
     <h2 class="section-title">Urban Series</h2>
     <div class="col-grid" id="col-grid">
 
-      <article class="card" data-idx="0" onclick="location.href='product.html'" style="cursor:none">
+      <article class="card" data-idx="0" data-cursor="View" onclick="location.href='product.html'" style="cursor:none">
         <div class="card-scene">
           <img src="IMG/CARD_MODEL.png" class="card-img" alt="GRMP Classic" />
         </div>
@@ -156,6 +194,43 @@
     </div>
   </section>
 
+  <section id="showcase">
+    <div class="showcase-head">
+      <span class="eh-tag reveal">Interactive 3D</span>
+      <h2 class="eh-title reveal d1">Turn it over<br>in your hands.</h2>
+      <p class="showcase-sub reveal d2">Drag to spin the figure and study it from every angle. On your phone, tap the AR button to place it in your room — at real scale.</p>
+    </div>
+
+    <div class="showcase-stage reveal d1">
+      <div class="showcase-glow" aria-hidden="true"></div>
+      <div class="showcase-ring" aria-hidden="true"></div>
+
+      <model-viewer id="showcase-mv"
+        data-cursor="Drag"
+        camera-controls
+        disable-zoom
+        disable-pan
+        touch-action="pan-y"
+        auto-rotate
+        rotation-per-second="22deg"
+        interaction-prompt="none"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        shadow-intensity="0.35"
+        exposure="0.85"
+        camera-orbit="0deg 85deg 105%"
+        alt="Interactive 3D model of the GRMP Classic art toy">
+      </model-viewer>
+
+      <div class="showcase-hint" id="showcase-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h18M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+        </svg>
+        Drag to rotate
+      </div>
+    </div>
+  </section>
+
   <section id="stats">
     <div class="stats-grid">
       <div class="stat">
@@ -169,6 +244,43 @@
       <div class="stat">
         <div class="stat-num" id="s2">∞</div>
         <div class="stat-lbl">Collectible</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="faq-wrap">
+      <div class="faq-head">
+        <span class="eh-tag reveal">FAQ</span>
+        <h2 class="eh-title reveal d1">Good to know.</h2>
+      </div>
+      <div class="faq-list reveal d1">
+
+        <div class="faq-item">
+          <button class="faq-q">How limited is each drop?<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Every drop is capped at 100 individually numbered pieces. Once they're gone, there are no restocks — the edition is closed forever.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">When does DROP 001 go live?<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>We announce the exact release to our waitlist first. Join below and you'll get early access before the public launch.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">What's included in the box?<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Each GRMP ships in a numbered collector's box with a signed certificate of authenticity and protective packaging built for safe worldwide delivery.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Do you ship internationally?<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Yes — we ship worldwide. Shipping is calculated at checkout, and every order is fully tracked from our studio to your door.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Are the pieces really hand-painted?<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Absolutely. Each figure is finished by hand, so subtle variations are part of the character — no two pieces are ever perfectly identical.</p></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -200,6 +312,7 @@
   </footer>
 
   <script type="module" src="./script.js"></script>
+  <script defer src="./enhance.js?v=7"></script>
 
 </body>
 </html>
