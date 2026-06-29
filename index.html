@@ -19,13 +19,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./enhance.css?v=7" />
+  <link rel="stylesheet" href="./styles.css?v=18" />
+  <link rel="stylesheet" href="./enhance.css?v=20" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <script type="importmap">
   {
@@ -46,16 +47,25 @@
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
 
-  <div id="preloader">
-    <img src="" alt="THE GRAMPS" id="pre-logo" />
-    <div id="pre-counter">000</div>
-    <div class="pre-bar"><div id="pre-bar-fill"></div></div>
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-panel pl-top"></div>
+    <div class="pl-panel pl-bottom"></div>
+    <div class="pl-seam"></div>
+    <div class="pl-content">
+      <img src="IMG/GRMPS_LOGO.svg" alt="THE GRAMPS" id="pre-logo" />
+      <div class="pl-meta">
+        <span class="pl-label">Limited Edition</span>
+        <span id="pre-counter">000</span>
+        <span class="pl-label">Drop 001</span>
+      </div>
+      <div class="pre-bar"><div id="pre-bar-fill"></div></div>
+    </div>
   </div>
 
   <nav id="nav">
-    <img src="" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
+    <img src="IMG/GRMPS_LOGO.svg" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
     <ul class="nav-links" id="nav-links">
-      <li><a href="#about">About</a></li>
+      <li><a href="#hero">About</a></li>
       <li><a href="#collection">Collection</a></li>
       <li><a href="#contact">Waitlist</a></li>
       <li><a href="https://grmpsstory.cargo.site" target="_blank" rel="noopener">Story</a></li>
@@ -74,7 +84,7 @@
       </svg>
     </button>
     <ul>
-      <li><a href="#about">About</a></li>
+      <li><a href="#hero">About</a></li>
       <li><a href="#collection">Collection</a></li>
       <li><a href="#contact">Waitlist</a></li>
       <li><a href="https://grmpsstory.cargo.site" target="_blank" rel="noopener">Story</a></li>
@@ -82,112 +92,118 @@
   </div>
 
   <section id="hero">
+    <h1 class="hero-seo" aria-label="THE GRMPS — Limited Edition Art Toys">THE GRMPS</h1>
+
+    <!-- Brand logo watermark (behind the figure) -->
+    <div class="hero-bgword" id="hero-bgword" aria-hidden="true"></div>
+
     <canvas id="hero-canvas"></canvas>
 
-    <model-viewer id="hero-mv"
-      auto-rotate
-      rotation-per-second="18deg"
-      camera-controls
-      disable-zoom
-      shadow-intensity="0"
-      exposure="0.5"
-      camera-orbit="0deg 80deg 105%"
-      style="background:transparent;--poster-color:transparent">
-    </model-viewer>
+    <!-- Story beats: fade/slide in over the figure while it animates on scroll -->
+    <div class="hero-stories" id="hero-stories">
+      <article class="hero-story from-left" id="beat0">
+        <span class="hs-tag">The Brand</span>
+        <h2 class="hs-h">Street culture,<br>meets sculpture.</h2>
+        <p>THE GRAMPS lives where urban art, collectible culture and real craftsmanship collide — limited pieces that bridge the street and the gallery.</p>
+      </article>
 
-    <div class="hero-content">
-      <p class="hero-eyebrow" id="hero-eyebrow">Urban Art Toys</p>
-      <h1 class="hero-title">
-        <span class="line" id="hl1">THE</span>
-        <span class="line" id="hl2">GRMPS</span>
-      </h1>
-      <p class="hero-sub" id="hero-sub">Limited Edition Art Toys</p>
+      <article class="hero-story from-right" id="beat1">
+        <span class="hs-num">01</span>
+        <h2 class="hs-h">Designed.</h2>
+        <p>Every GRMP starts as a hand-drawn concept, refined over dozens of iterations until the silhouette feels unmistakably ours.</p>
+      </article>
+
+      <article class="hero-story from-left" id="beat2">
+        <span class="hs-num">02</span>
+        <h2 class="hs-h">Sculpted.</h2>
+        <p>Cast in premium soft vinyl, engineered to hold crisp detail from every angle and survive a lifetime on the shelf.</p>
+      </article>
+
+      <article class="hero-story from-right" id="beat3">
+        <span class="hs-num">03</span>
+        <h2 class="hs-h">Hand-finished.</h2>
+        <p>Hand-painted, individually numbered and sealed with a matte finish, then boxed with its certificate of authenticity.</p>
+      </article>
     </div>
 
-    <div class="scroll-hint" id="scroll-hint">
+    <!-- Editorial labels scattered around the figure (fade out on scroll) -->
+    <div class="hero-lead lead-tl">
+      <p class="t-eyebrow">Urban Art Toys</p>
+      <p class="t-mono">Limited Edition</p>
+    </div>
+
+    <p class="hero-lead lead-rv t-mono">Drop 001 — 100</p>
+
+    <div class="hero-lead lead-bl">
+      <p class="t-name">GRMP — Classic</p>
+      <p class="t-mono">$99 · Edition 001 / 100</p>
+    </div>
+
+    <div class="hero-lead lead-br">
+      <p class="t-tag">Where street culture<br>meets sculpture.</p>
+      <a href="#collection" class="hero-link" data-cursor="Explore">Explore the drop →</a>
+    </div>
+
+    <div class="scroll-hint hero-lead" id="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-text">
-        <span class="about-tag">The Brand</span>
-        <h2 class="about-headline">Where street culture<br>meets sculpture.</h2>
-        <div class="about-body">
-          <p>THE GRAMPS is born at the intersection of urban art, collectible culture, and fine craftsmanship. Each figure is a statement — a limited piece that bridges the gap between the street and the gallery.</p>
-          <p>Inspired by the raw energy of city walls and the quiet permanence of sculpture, every drop is a conversation between tradition and rebellion.</p>
-        </div>
-      </div>
-      <div class="about-3d">
-        <canvas id="about-canvas"></canvas>
-      </div>
-    </div>
-  </section>
-
-  <section id="process">
-    <div class="process-head">
-      <span class="eh-tag reveal">How it's made</span>
-      <h2 class="eh-title reveal d1">From sketch<br>to statement.</h2>
-    </div>
-    <div class="process-steps">
-      <article class="pstep reveal">
-        <span class="pstep-num">01</span>
-        <h3>Designed</h3>
-        <p>Every GRMP starts as a hand-drawn concept — refined over dozens of iterations until the silhouette feels unmistakably ours.</p>
-      </article>
-      <article class="pstep reveal d1">
-        <span class="pstep-num">02</span>
-        <h3>Sculpted</h3>
-        <p>The form is sculpted and cast in premium soft vinyl, engineered to hold crisp detail from every angle and survive a lifetime on the shelf.</p>
-      </article>
-      <article class="pstep reveal d2">
-        <span class="pstep-num">03</span>
-        <h3>Hand-finished</h3>
-        <p>Each piece is hand-painted, individually numbered, and sealed with a matte finish — then boxed with its certificate of authenticity.</p>
-      </article>
-    </div>
-  </section>
-
   <section id="collection">
-    <span class="section-tag">Drop 001</span>
-    <h2 class="section-title">Urban Series</h2>
+    <div class="col-head">
+      <span class="section-tag">Drop 001 — 3 Colorways</span>
+      <h2 class="section-title r-clip">Urban Series</h2>
+      <p class="col-sub reveal d1">Three finishes, one hundred of each — numbered, hand-painted, and gone for good once they sell out.</p>
+    </div>
+
     <div class="col-grid" id="col-grid">
 
-      <article class="card" data-idx="0" data-cursor="View" onclick="location.href='product.html'" style="cursor:none">
-        <div class="card-scene">
-          <img src="IMG/CARD_MODEL.png" class="card-img" alt="GRMP Classic" />
+      <article class="card is-available" data-idx="0" data-cursor="View" data-nav="product.html">
+        <span class="cc-index">01</span>
+        <span class="cc-dot" aria-hidden="true"></span>
+        <div class="card-scene cc-stage">
+          <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Classic" loading="lazy" />
         </div>
-        <div class="card-info">
-          <p class="card-ed">Edition 001 / 100</p>
-          <h3 class="card-name">GRMP — Classic</h3>
-          <p class="card-price">$99</p>
-          <button class="card-btn" onclick="event.stopPropagation();location.href='product.html'">VIEW DETAILS</button>
-        </div>
-      </article>
-
-      <article class="card" data-idx="1">
-        <div class="card-scene card-soon">
-          <span class="soon-label">Coming Soon</span>
-        </div>
-        <div class="card-info">
-          <p class="card-ed">Edition 001 / 100</p>
-          <h3 class="card-name">GRMP — Midnight</h3>
-          <p class="card-price">$99</p>
-          <button class="card-btn" data-wl>NOTIFY ME</button>
+        <div class="cc-info">
+          <div class="cc-row">
+            <h3 class="cc-name">Classic</h3>
+            <span class="cc-price">$99</span>
+          </div>
+          <p class="cc-meta">Edition 001 / 100 · <em>In stock</em></p>
+          <span class="cc-cta">View details<span class="cc-arr">→</span></span>
         </div>
       </article>
 
-      <article class="card" data-idx="2">
-        <div class="card-scene card-soon">
-          <span class="soon-label">Coming Soon</span>
+      <article class="card is-soon cw-midnight" data-idx="1">
+        <span class="cc-index">02</span>
+        <span class="cc-badge">Coming soon</span>
+        <div class="card-scene cc-stage">
+          <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Midnight" loading="lazy" />
         </div>
-        <div class="card-info">
-          <p class="card-ed">Edition 001 / 100</p>
-          <h3 class="card-name">GRMP — Dusk</h3>
-          <p class="card-price">$99</p>
-          <button class="card-btn" data-wl>NOTIFY ME</button>
+        <div class="cc-info">
+          <div class="cc-row">
+            <h3 class="cc-name">Midnight</h3>
+            <span class="cc-price">$99</span>
+          </div>
+          <p class="cc-meta">Edition 001 / 100</p>
+          <button class="cc-cta" data-wl>Notify me<span class="cc-arr">→</span></button>
+        </div>
+      </article>
+
+      <article class="card is-soon cw-dusk" data-idx="2">
+        <span class="cc-index">03</span>
+        <span class="cc-badge">Coming soon</span>
+        <div class="card-scene cc-stage">
+          <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Dusk" loading="lazy" />
+        </div>
+        <div class="cc-info">
+          <div class="cc-row">
+            <h3 class="cc-name">Dusk</h3>
+            <span class="cc-price">$99</span>
+          </div>
+          <p class="cc-meta">Edition 001 / 100</p>
+          <button class="cc-cta" data-wl>Notify me<span class="cc-arr">→</span></button>
         </div>
       </article>
 
@@ -197,7 +213,7 @@
   <section id="showcase">
     <div class="showcase-head">
       <span class="eh-tag reveal">Interactive 3D</span>
-      <h2 class="eh-title reveal d1">Turn it over<br>in your hands.</h2>
+      <h2 class="eh-title r-clip">Turn it over<br>in your hands.</h2>
       <p class="showcase-sub reveal d2">Drag to spin the figure and study it from every angle. On your phone, tap the AR button to place it in your room — at real scale.</p>
     </div>
 
@@ -231,19 +247,39 @@
     </div>
   </section>
 
+  <section id="manifesto">
+    <div class="mf-inner">
+      <span class="mf-eyebrow reveal">Manifesto</span>
+      <h2 class="mf-statement r-words">Made to be <em>kept</em>,<br>not consumed.</h2>
+      <p class="mf-sub reveal d2">Every GRMP is numbered, hand-finished, and made once. When the hundred are gone, they're gone — no restocks, no exceptions.</p>
+      <a href="#contact" class="mf-cta reveal d3" data-cursor="Join">Join the waitlist <span class="cc-arr">→</span></a>
+    </div>
+
+    <div class="mf-marquee" aria-hidden="true">
+      <div class="mf-track">
+        <span>The GRMPS</span><i>✦</i><span>Limited Edition</span><i>✦</i><span>Hand-Painted</span><i>✦</i><span>Numbered 001 / 100</span><i>✦</i><span>No Restocks</span><i>✦</i>
+        <span>The GRMPS</span><i>✦</i><span>Limited Edition</span><i>✦</i><span>Hand-Painted</span><i>✦</i><span>Numbered 001 / 100</span><i>✦</i><span>No Restocks</span><i>✦</i>
+      </div>
+    </div>
+  </section>
+
   <section id="stats">
     <div class="stats-grid">
       <div class="stat">
-        <div class="stat-num" id="s0">001</div>
-        <div class="stat-lbl">Pieces in this drop</div>
+        <div class="stat-num" id="s0">100</div>
+        <div class="stat-lbl">Numbered pieces</div>
       </div>
       <div class="stat">
-        <div class="stat-num" id="s1">2026</div>
-        <div class="stat-lbl">Year</div>
+        <div class="stat-num" id="s1">001</div>
+        <div class="stat-lbl">The drop</div>
       </div>
       <div class="stat">
-        <div class="stat-num" id="s2">∞</div>
-        <div class="stat-lbl">Collectible</div>
+        <div class="stat-num" id="s2">2026</div>
+        <div class="stat-lbl">Release</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="s3">∞</div>
+        <div class="stat-lbl">Yours, forever</div>
       </div>
     </div>
   </section>
@@ -252,7 +288,7 @@
     <div class="faq-wrap">
       <div class="faq-head">
         <span class="eh-tag reveal">FAQ</span>
-        <h2 class="eh-title reveal d1">Good to know.</h2>
+        <h2 class="eh-title r-clip">Good to know.</h2>
       </div>
       <div class="faq-list reveal d1">
 
@@ -285,10 +321,20 @@
     </div>
   </section>
 
+  <section class="studio-quote">
+    <div class="sq-wrap">
+      <span class="sq-mark" aria-hidden="true" data-speed="18">&ldquo;</span>
+      <blockquote class="sq-text r-words">We never set out<br>to make a toy. We made the<br>kind of object you'd actually <em>keep</em>.</blockquote>
+      <div class="sq-by reveal">
+        <img src="IMG/GRMPS_LOGO.svg" alt="" class="sq-logo" />
+        <span>The GRMPS Studio — Drop 001</span>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
-    <canvas id="contact-canvas"></canvas>
     <div class="contact-inner">
-      <h2 class="contact-title">Join the<br>Waitlist.</h2>
+      <h2 class="contact-title r-clip">Join the<br>Waitlist.</h2>
       <p class="contact-sub">Be first to know when DROP 001 goes live.<br>Limited pieces. No restocks.</p>
       <form class="wl-form" id="wl-form" novalidate>
         <input type="email" placeholder="your@email.com" required autocomplete="email" />
@@ -299,11 +345,11 @@
   </section>
 
   <footer>
-    <img src="" alt="THE GRAMPS" class="ft-logo" />
+    <img src="IMG/GRMPS_LOGO.svg" alt="THE GRAMPS" class="ft-logo" data-speed="-14" />
     <p class="ft-tag">Handcrafted. Limited. Yours.</p>
     <div class="ft-right">
       <ul class="ft-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#hero">About</a></li>
         <li><a href="#collection">Collection</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -311,8 +357,8 @@
     </div>
   </footer>
 
-  <script type="module" src="./script.js"></script>
-  <script defer src="./enhance.js?v=7"></script>
+  <script type="module" src="./script.js?v=19"></script>
+  <script defer src="./enhance.js?v=13"></script>
 
 </body>
 </html>

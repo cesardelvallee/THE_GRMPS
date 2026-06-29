@@ -8,17 +8,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./enhance.css?v=7" />
-  <link rel="stylesheet" href="./product.css" />
+  <link rel="stylesheet" href="./styles.css?v=18" />
+  <link rel="stylesheet" href="./enhance.css?v=20" />
+  <link rel="stylesheet" href="./product.css?v=8" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
 </head>
 <body class="product-page">
+
+  <div id="page-transition" class="pt-cover" aria-hidden="true">
+    <img class="pt-logo" src="IMG/GRMPS_LOGO.svg" alt="" />
+  </div>
+
+  <div class="pd-sticky" id="pd-sticky">
+    <div class="pd-sticky-info">
+      <img class="pd-sticky-img" src="IMG/grmp_front.png" alt="" />
+      <div>
+        <p class="pd-sticky-name">GRMP — Classic</p>
+        <p class="pd-sticky-meta">$99 · Edition 001 / 100</p>
+      </div>
+    </div>
+    <button class="pd-sticky-cta" data-nav="index.html#contact">Add to Waitlist</button>
+  </div>
 
   <div id="grain" aria-hidden="true"></div>
   <div id="scroll-progress" aria-hidden="true"></div>
@@ -28,10 +44,10 @@
 
   <nav id="nav" class="nav-visible">
     <a href="index.html" class="nav-logo-link">
-      <img src="" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
+      <img src="IMG/GRMPS_LOGO.svg" alt="THE GRAMPS" class="nav-logo" id="nav-logo" />
     </a>
     <ul class="nav-links nav-links-visible">
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#hero">About</a></li>
       <li><a href="index.html#collection">Collection</a></li>
       <li><a href="index.html#contact">Waitlist</a></li>
       <li><a href="https://grmpsstory.cargo.site" target="_blank" rel="noopener">Story</a></li>
@@ -50,8 +66,10 @@
     <div class="pd-viewer" id="pd-viewer">
       <div class="pd-gallery">
         <div class="pd-main-img-wrap">
+          <div class="pd-bgword" aria-hidden="true">CLASSIC</div>
           <div class="pd-glow" aria-hidden="true"></div>
-          <img id="pd-main-img" src="IMG/grmp_front.png" alt="GRMP Classic" />
+          <img id="pd-main-img" src="IMG/grmp_front.png" alt="GRMP Classic" data-cursor="Zoom" />
+          <span class="pd-edition-mark" aria-hidden="true">Ed. 001 / 100</span>
         </div>
 
         <div class="pd-thumbs" id="pd-thumbs">
@@ -86,7 +104,7 @@
 
         <p class="pd-eyebrow">Drop 001 · Urban Series</p>
 
-        <h1 class="pd-name">
+        <h1 class="pd-name r-lines">
           GRMP<br><em>Classic</em>
         </h1>
 
@@ -117,13 +135,15 @@
         </div>
 
         <div class="pd-actions">
-          <button class="pd-cta" id="pd-cta">Add to Waitlist</button>
+          <button class="pd-cta" id="pd-cta" data-nav="index.html#contact">Add to Waitlist</button>
         </div>
 
-        <p class="pd-note">
-          Ships worldwide in a numbered collector's box.<br>
-          Certificate of authenticity included.
-        </p>
+        <ul class="pd-trust">
+          <li>Individually numbered — 001 / 100</li>
+          <li>Hand-painted &amp; sealed with a matte finish</li>
+          <li>Signed certificate of authenticity</li>
+          <li>Worldwide shipping, fully tracked</li>
+        </ul>
 
       </div>
     </div>
@@ -143,10 +163,39 @@
     </div>
   </section>
 
+  <section class="pd-box">
+    <div class="pd-box-wrap">
+      <span class="section-tag reveal">In the box</span>
+      <h2 class="pd-box-h r-lines">Everything<br>you unbox.</h2>
+      <div class="pd-box-grid">
+        <div class="pd-box-item reveal">
+          <span class="pd-box-n">01</span>
+          <h3>The figure</h3>
+          <p>Your numbered GRMP Classic, hand-finished and sealed with a matte coat.</p>
+        </div>
+        <div class="pd-box-item reveal d1">
+          <span class="pd-box-n">02</span>
+          <h3>Certificate</h3>
+          <p>A signed certificate of authenticity carrying your edition number.</p>
+        </div>
+        <div class="pd-box-item reveal d2">
+          <span class="pd-box-n">03</span>
+          <h3>Collector's box</h3>
+          <p>A numbered, protective box engineered for safe worldwide delivery.</p>
+        </div>
+        <div class="pd-box-item reveal d3">
+          <span class="pd-box-n">04</span>
+          <h3>Art card</h3>
+          <p>A printed art card exclusive to the Urban Series drop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pd-specs-section">
     <div class="pd-specs-wrap">
       <span class="section-tag">Specifications</span>
-      <h2 class="pd-specs-h">Details.</h2>
+      <h2 class="pd-specs-h r-lines">Details.</h2>
       <div class="specs-list">
         <div class="specs-row"><span class="sk">Name</span><span class="sv">GRMP — Classic</span></div>
         <div class="specs-row"><span class="sk">Drop</span><span class="sv">001 — Urban Series</span></div>
@@ -159,6 +208,82 @@
         <div class="specs-row"><span class="sk">Price</span><span class="sv">$99 USD</span></div>
         <div class="specs-row"><span class="sk">Shipping</span><span class="sv">Worldwide</span></div>
         <div class="specs-row"><span class="sk">Release</span><span class="sv">2025</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-faq">
+    <div class="pd-faq-wrap">
+      <span class="section-tag reveal">Good to know</span>
+      <h2 class="pd-faq-h r-lines">Shipping, care<br>&amp; the details.</h2>
+      <div class="faq-list reveal d1">
+        <div class="faq-item">
+          <button class="faq-q">Shipping &amp; delivery<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Every order ships worldwide from our studio in a numbered collector's box, fully tracked. Most orders arrive within 5–9 business days of the drop.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Returns &amp; exchanges<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Each piece is numbered and made to order, so returns are accepted only for items damaged in transit — reach out within 14 days and we'll make it right.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Authenticity<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Your GRMP ships with a signed certificate of authenticity carrying its unique edition number — verifiably one of only one hundred.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Caring for your piece<span class="faq-icon"></span></button>
+          <div class="faq-a"><p>Keep it out of direct sunlight to protect the hand-painted finish, and dust gently with a soft, dry cloth. No water, no solvents.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-series">
+    <div class="pd-series-wrap">
+      <div class="pd-series-head">
+        <span class="section-tag reveal">The Series</span>
+        <h2 class="pd-series-h r-lines">Complete the set.</h2>
+      </div>
+      <div class="col-grid">
+
+        <article class="card is-available reveal">
+          <span class="cc-index">01</span>
+          <span class="cc-badge">This piece</span>
+          <div class="card-scene cc-stage">
+            <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Classic" loading="lazy" />
+          </div>
+          <div class="cc-info">
+            <div class="cc-row"><h3 class="cc-name">Classic</h3><span class="cc-price">$99</span></div>
+            <p class="cc-meta">Edition 001 / 100 · <em>In stock</em></p>
+            <span class="cc-cta">You're viewing it</span>
+          </div>
+        </article>
+
+        <article class="card is-soon cw-midnight reveal d1" data-cursor="Notify" data-nav="index.html#contact">
+          <span class="cc-index">02</span>
+          <span class="cc-badge">Coming soon</span>
+          <div class="card-scene cc-stage">
+            <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Midnight" loading="lazy" />
+          </div>
+          <div class="cc-info">
+            <div class="cc-row"><h3 class="cc-name">Midnight</h3><span class="cc-price">$99</span></div>
+            <p class="cc-meta">Edition 001 / 100</p>
+            <span class="cc-cta">Notify me<span class="cc-arr">→</span></span>
+          </div>
+        </article>
+
+        <article class="card is-soon cw-dusk reveal d2" data-cursor="Notify" data-nav="index.html#contact">
+          <span class="cc-index">03</span>
+          <span class="cc-badge">Coming soon</span>
+          <div class="card-scene cc-stage">
+            <img src="IMG/CARD_MODEL.png" class="cc-img" alt="GRMP Dusk" loading="lazy" />
+          </div>
+          <div class="cc-info">
+            <div class="cc-row"><h3 class="cc-name">Dusk</h3><span class="cc-price">$99</span></div>
+            <p class="cc-meta">Edition 001 / 100</p>
+            <span class="cc-cta">Notify me<span class="cc-arr">→</span></span>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -179,11 +304,11 @@
   </div>
 
   <footer>
-    <img src="" alt="THE GRAMPS" class="ft-logo" id="ft-logo" />
+    <img src="IMG/GRMPS_LOGO.svg" alt="THE GRAMPS" class="ft-logo" id="ft-logo" />
     <p class="ft-tag">Handcrafted. Limited. Yours.</p>
     <div class="ft-right">
       <ul class="ft-links">
-        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#hero">About</a></li>
         <li><a href="index.html#collection">Collection</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
@@ -191,7 +316,7 @@
     </div>
   </footer>
 
-  <script type="module" src="./product.js"></script>
-  <script defer src="./enhance.js?v=7"></script>
+  <script type="module" src="./product.js?v=7"></script>
+  <script defer src="./enhance.js?v=13"></script>
 </body>
 </html>
