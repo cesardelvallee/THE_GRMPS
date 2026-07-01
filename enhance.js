@@ -284,14 +284,61 @@
     });
   }
 
-  /* ---------- 6f. Collection card image parallax (drift inside the frame) ---------- */
-  if (hasGsap && ST && !RM) {
+  /* ---------- 6f-pre. Horizontal collection "lookbook" (desktop only) ----------
+     Vertical scroll pans the cards horizontally inside a pinned rail. */
+  let colHoriz = false;
+  (function setupHorizontalCollection() {
+    const rail = $('.col-rail'), grid = $('#col-grid');
+    if (!rail || !grid || !hasGsap || !ST || RM || TOUCH || innerWidth <= 900) return;
+    rail.classList.add('is-horizontal');
+    const hintFill = $('.col-hint i', rail);
+    const dist = () => Math.max(0, grid.scrollWidth - innerWidth);
+    gsap.to(grid, {
+      x: () => -dist(), ease: 'none',
+      scrollTrigger: {
+        trigger: rail, start: 'top top', end: () => '+=' + dist(),
+        pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1,
+        onUpdate: self => { if (hintFill) hintFill.style.setProperty('--p', (self.progress * 100) + '%'); }
+      }
+    });
+    colHoriz = true;
+  })();
+
+  /* ---------- 6f. Collection card image parallax (vertical layout only) ---------- */
+  if (hasGsap && ST && !RM && !colHoriz) {
     $$('.cc-img').forEach(img => {
       gsap.fromTo(img, { yPercent: -6, scale: 1.16 }, {
         yPercent: 6, scale: 1.16, ease: 'none',
         scrollTrigger: { trigger: img.closest('.card') || img, start: 'top bottom', end: 'bottom top', scrub: true }
       });
     });
+  }
+
+  /* ---------- 6g. Text scramble / decode on section eyebrows ---------- */
+  if ('IntersectionObserver' in window && !RM) {
+    const G = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/<>*+=';
+    const scramble = el => {
+      if (el.dataset.scrambled || el.children.length) return;   // plain single-line text only
+      const final = el.textContent; if (!final.trim()) return;
+      el.dataset.scrambled = '1';
+      const n = final.length;
+      const reveal = final.split('').map((_, i) => 5 + ((Math.random() * 7) | 0) + (((i / n) * 16) | 0));
+      const max = Math.max(...reveal) + 2; let f = 0;
+      const iv = setInterval(() => {
+        let s = '';
+        for (let i = 0; i < n; i++) {
+          const c = final[i];
+          if (c === ' ' || c === '—' || c === '·') { s += c; continue; }
+          s += f >= reveal[i] ? c : G[(Math.random() * G.length) | 0];
+        }
+        el.textContent = s; f++;
+        if (f > max) { clearInterval(iv); el.textContent = final; }
+      }, 33);
+    };
+    const sio = new IntersectionObserver(ents => {
+      ents.forEach(e => { if (e.isIntersecting) { scramble(e.target); sio.unobserve(e.target); } });
+    }, { threshold: .6 });
+    $$('.section-tag, .eh-tag').forEach(el => sio.observe(el));
   }
 
   /* ---------- 7. Interactive 3D showcase ----------
@@ -353,6 +400,24 @@
       });
       el.addEventListener('mouseleave', () => cl.classList.remove('show'));
     });
+  }
+
+  /* ---------- 10b. Cursor-following ambient light ---------- */
+  if (!TOUCH) {
+    const cLight = document.createElement('div');
+    cLight.id = 'cursor-light';
+    document.body.appendChild(cLight);
+    let lx = innerWidth / 2, ly = innerHeight / 2, tx = lx, ty = ly, shown = false;
+    addEventListener('mousemove', e => {
+      tx = e.clientX; ty = e.clientY;
+      if (!shown) { shown = true; cLight.classList.add('on'); }
+    }, { passive: true });
+    const drive = () => {
+      lx += (tx - lx) * .12; ly += (ty - ly) * .12;
+      cLight.style.transform = `translate3d(${lx}px,${ly}px,0)`;
+    };
+    if (hasGsap) gsap.ticker.add(drive);
+    else { const r = () => { drive(); requestAnimationFrame(r); }; requestAnimationFrame(r); }
   }
 
   /* ---------- 11. Auto-update footer year ---------- */

@@ -46,6 +46,19 @@ body {
 #cursor.on  { width: 6px; height: 6px; opacity: .5; }
 #cursor-ring.on { width: 54px; height: 54px; border-color: var(--highlight); }
 
+/* Soft ambient light that follows the cursor over the dark sections.
+   Single moderate layer, only repaints while the pointer moves. */
+#cursor-light {
+  position: fixed; top: 0; left: 0; width: 520px; height: 520px;
+  margin: -260px 0 0 -260px; border-radius: 50%;
+  z-index: 60; pointer-events: none;
+  background: radial-gradient(circle, rgba(196,168,130,.10), rgba(42,164,207,.05) 42%, transparent 70%);
+  mix-blend-mode: screen; opacity: 0;
+  transition: opacity .6s ease; will-change: transform;
+}
+#cursor-light.on { opacity: 1; }
+@media (hover: none), (pointer: coarse) { #cursor-light { display: none; } }
+
 
 /* ----------  Cinematic intro — theater-curtain reveal  ---------- */
 #preloader { position: fixed; inset: 0; z-index: 10000; overflow: hidden; pointer-events: none; }
@@ -61,26 +74,39 @@ body {
   box-shadow: 0 0 22px rgba(196,168,130,.5);
 }
 .pl-content {
+  /* 3-zone grid: logo above, COUNTER dead-centre, bar below */
   position: absolute; inset: 0; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: clamp(22px, 3.6vh, 40px);
+  display: grid; grid-template-rows: 1fr auto 1fr;
+  justify-items: center; align-items: center;
 }
 #pre-logo {
+  align-self: end; margin-bottom: clamp(24px, 5vh, 56px);
   width: clamp(170px, 26vw, 300px); height: auto;
   filter: brightness(0) invert(1) brightness(.95) sepia(.08);
   clip-path: inset(0 100% 0 0);          /* JS wipes it in left→right */
 }
-.pl-meta { display: flex; align-items: center; gap: clamp(16px, 2.6vw, 32px); }
+.pl-meta {
+  align-self: center;                    /* the counter row sits at screen centre */
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(16px, 3vw, 36px); width: min(640px, 88vw);
+}
 .pl-label {
+  flex: 1 1 0;                           /* equal sides → number perfectly centred */
   font-family: var(--fm); font-size: .56rem; letter-spacing: .26em; text-transform: uppercase;
   color: rgba(232,224,208,.42); white-space: nowrap;
 }
+.pl-label:first-child { text-align: right; }
+.pl-label:last-child  { text-align: left; }
 #pre-counter {
+  flex: 0 0 auto;
   font-family: var(--fd); font-weight: 700; line-height: 1;
   font-size: clamp(2.6rem, 8vw, 5.4rem); letter-spacing: -.05em;
   color: var(--accent); font-variant-numeric: tabular-nums;
 }
-.pre-bar { width: clamp(180px, 28vw, 340px); height: 1px; background: rgba(232,224,208,.12); overflow: hidden; }
+.pre-bar {
+  align-self: start; margin-top: clamp(24px, 5vh, 56px);
+  width: clamp(180px, 28vw, 340px); height: 1px; background: rgba(232,224,208,.12); overflow: hidden;
+}
 #pre-bar-fill { height: 100%; width: 0; background: var(--highlight); }
 
 
